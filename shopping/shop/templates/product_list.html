@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <h2>All Products</h2>
+    <hr>
+    <hr>
+
+    <ul>
+        {% for i in Products %}
+        <li>
+            {% if i.product_image %}
+            <img src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
+            {% else %}
+            <p>No Image available</p>
+            {% endif %}
+            <hr>
+            <div class="info">
+                <h3>{{ i.product_name }}</h3>
+                <p>Price: ₹{{ i.product_price }}</p>
+                <p>{{ i.product_description }}</p>
+            </div>
+        </li>
+
+        {% empty %}
+        <li>No product found</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>

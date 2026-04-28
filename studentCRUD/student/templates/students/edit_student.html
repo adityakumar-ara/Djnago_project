@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update Student</title>
+</head>
+
+<body style="font-family: Arial; padding: 20px;">
+
+    <h2>Update Student Details</h2>
+    <hr>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <p>Name: <input type="text" name="name" value="{{ i.name }}"></p>
+        <p>Roll No: <input type="text" name="roll" value="{{ i.roll }}"></p>
+        <p>Village: <input type="text" name="village" value="{{ i.village }}"></p>
+        <p>Email: <input type="email" name="email" value="{{ i.Email }}"></p>
+
+        <p>
+            Current Photo:<br>
+            {% if i.image %}
+            <img src="{{ i.image.url }}" width="100" style="border-radius: 10px; margin-bottom: 10px;">
+            {% endif %}
+        </p>
+        <p>Change Photo: <input type="file" name="image"></p>
+
+        <button type="submit" style="background-color: green; color: white; padding: 10px; border-radius: 5px;">Update
+            Student</button>
+    </form>
+
+</body>
+
+</html>

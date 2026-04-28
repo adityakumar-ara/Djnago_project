@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 50px;
+}
+
+ul {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    list-style: none;
+    gap: 20px;
+
+}
+
+ul li {
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 0px;
+    padding: 0;
+    vertical-align: top;
+}
+
+ul li img {
+    height: 200px;
+    width: 250px;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.info {
+    padding: 15px;
+    /* background: #000;
+    color: white;
+    margin: 0; */
+}
+
+ul li:nth-child(4) img {
+    height: 200px;
+    width: 280;
+}
+
+ul li:nth-child(4) p {
+    max-width: 200px;
+}

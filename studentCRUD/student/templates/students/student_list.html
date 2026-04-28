@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student List</title>
+</head>
+
+<body style="font-family: Arial;">
+
+    <h1>Student Directory</h1>
+    <hr>
+
+    <ul>
+        {% for i in students %}
+        <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; max-width: 400px;">
+
+            <h3>{{ i.name }} (Roll: {{ i.roll }})</h3>
+            <p>Village: {{ i.village }}</p>
+            <p>Email: {{ i.Email }}</p>
+
+            {% if i.image %}
+            <img src="{{i.image.url }}" width="100" style="border-radius: 10px;">
+            {% endif %}
+            <br><br>
+            <a href="{% url 'edit_student' i.id %}"
+                style="background-color: blue; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">
+                Edit ✏️
+            </a>
+            <a href="{% url 'delete_student' i.id %}"
+                style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">
+                Delete 🗑️
+            </a>
+
+        </li>
+        {% empty %}
+        <p style="color: red;">Abhi tak koi student add nahi hua hai!</p>
+        {% endfor %}
+    </ul>
+
+
+</body>
+
+</html>
