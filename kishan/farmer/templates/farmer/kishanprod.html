@@ -1,0 +1,45 @@
+{% extends 'farmer/main.html' %}
+
+{% block content %}
+<div class="p-5">
+    <a href="/register/" class="btn btn-success">+ Add Farmer</a>
+
+
+
+    <table class="table table-borderd mt-5 p-2">
+        <thead class="table-primary">
+            <th>Farmer Name</th>
+            <th>Village Name </th>
+            <th>Pin Code </th>
+            <th>Crop Name </th>
+            <th>quantity </th>
+            <th>unit </th>
+            <th>Action</th>
+        </thead>
+        {% for i in sales %}
+        <tbody class="table-success">
+            <td>{{ i.farmer.f_name }}</td>
+            <td>{{ i.farmer.f_vill }}</td>
+            <td>{{ i.farmer.f_pin }}</td>
+
+            <td>{{ i.crop_name }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.unit }}</td>
+            <td>
+                <a href="{% url 'delete_farmer' i.farmer.id %}"
+                    class="badge  text-bg-danger text-decoration-none fs-6">Delete</a>
+                <a href="{% url 'editdetail' i.farmer.id %}"
+                    class="badge text-bg-warning text-decoration-none fs-6">Edit</a>
+            </td>
+        </tbody>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="color: red; text-align: center;">
+                Abhi tak koi farmer Crop sale add nahi hua hai!
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

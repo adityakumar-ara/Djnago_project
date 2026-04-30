@@ -1,0 +1,55 @@
+{% extends 'farmer/main.html'%}
+
+{% block content%}
+
+<form method="post" enctype="multipart/form-data">
+    <h2>Edit Your Details</h2>
+    {% csrf_token %}
+    <div class="">
+        <label for="">Name</label>
+        <input type="text" name="f_name" value="{{farmer.f_name}}" id="" class="form-control" required>
+    </div>
+    <div class="">
+        <label for="">Adhar Number</label>
+        <input type="number" name="f_adha" id="" value="{{farmer.f_adha}}" class="form-control"oninput="if(this.value.length > 12) this.value = this.value.slice(0,12);" required>
+    </div>
+    <div class="">
+        <label for="">Village Name</label>
+        <input type="text" name="f_vill" id="" value="{{farmer.f_vill}}" class="form-control" required>
+    </div>
+    <div class="">
+        <label for="">Pin Code</label>
+        <input type="number" name="f_pin" id="" value="{{farmer.f_pin}}" class="form-control" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" required>
+    </div>
+    <h5 class="text-primary border-bottom pb-2 mt-4">Fasal Ki Details</h5>
+    <div class="mb-3">
+        <label>Crop Name</label>
+        <select name="crop_name" class="form-control" required>
+            {% for value, label in crop_choices %}
+            <option value="{{ value }}" {% if crop.crop_name == value %}selected{% endif %}>
+                {{ label }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input type="number" step="0.01" name="quantity" value="{{ crop.quantity }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Unit</label>
+        <select name="unit" class="form-control" required>
+            {% for value, label in unit_choices %}
+            <option value="{{ value }}" {% if crop.unit == value %}selected{% endif %}>
+                {{ label }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mt-4 mb-4">
+        <button type="submit" class="btn btn-warning w-100 fw-bold">Update Details</button>
+    </div>
+</form>
+{%endblock%}

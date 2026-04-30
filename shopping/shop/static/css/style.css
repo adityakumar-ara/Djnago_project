@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
 }
-
 h2 {
     text-align: center;
     font-size: 50px;
 }
-
+body {
+    background-color: rgb(158, 26, 26);
+    color: white;
+    min-height: 100vh;
+}
 ul {
     display: flex;
     margin-left: 20px;
@@ -22,7 +25,7 @@ ul li {
     border-radius: 10px;
     overflow: hidden;
     padding-bottom: 0px;
-    padding: 0;
+    padding: 0px;
     vertical-align: top;
 }
 
@@ -42,7 +45,7 @@ ul li img {
 
 ul li:nth-child(4) img {
     height: 200px;
-    width: 280;
+    width: 280px;
 }
 
 ul li:nth-child(4) p {

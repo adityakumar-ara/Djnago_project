@@ -1,0 +1,57 @@
+{% extends 'farmer/main.html' %}
+
+{% block content %}
+
+<div method="post" enctype="multipart/form-data" class="p-5">
+    <h2>Register Your Crop For sale</h2>
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label>Farmer Name:-</label>
+        <input type="text" name="f_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Adhar Number:-</label>
+        <input type="number" name="f_adha" class="form-control" oninput="if(this.value.length > 12) this.value = this.value.slice(0,12);" required>
+    </div>
+    <div class="mb-3">
+        <label>Village Name:-</label>
+        <input type="text" name="f_vill" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Pin Code:-</label>
+        <input type="number" name="f_pin" class="form-control" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" required>
+    </div>
+
+    <hr>
+    <h4>Crop Details</h4>
+
+    <div class="mb-3">
+        <label>Crop Name:-</label>
+        <select name="crop_name" class="form-control" required>
+            {% for value, label in crop_choices %}
+            <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Quantity:-</label>
+        <input type="number" step="0.01" name="quantity" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Unit:-</label>
+        <select name="unit" class="form-control" required>
+            {% for value, label in unit_choices %}
+            <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+   <div class="mt-4 mb-4 d-flex gap-3">
+        <a href="{% url 'Product_list' %}" class="btn btn-secondary w-50 fw-bold">🔙 Back</a>
+        
+        <button type="submit" class="btn btn-warning w-50 fw-bold">Submit Details 💾</button>
+    </div>
+</form>
+{% endblock %}
