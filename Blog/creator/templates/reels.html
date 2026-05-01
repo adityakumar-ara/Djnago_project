@@ -1,0 +1,128 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        background: black;
+        color: white;
+    }
+
+    .reel-container {
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+    }
+
+    .reel {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        scroll-snap-align: start;
+    }
+
+    video,
+    img {
+        max-height: 80vh;
+        max-width: 90%;
+        border-radius: 10px;
+    }
+
+    .info {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    video,
+    img {
+        /* 🚀 Changed 80vh to 60vh to make room for the comments */
+        max-height: 60vh;
+        max-width: 90%;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="reel-container">
+
+    {% for i in posts %}
+    <div class="reel">
+
+        {% if i.video %}
+        <video class="reel-video" muted loop>
+            <source src="{{ i.video.url }}" type="video/mp4">
+        </video>
+        {% endif %}
+
+        {% if i.image %}
+        <img src="{{ i.image.url }}">
+        {% endif %}
+
+        <div class="info">
+            <h3>{{ i.title }}</h3>
+            <p>{{ i.content|truncatewords:10 }}</p>
+            <p>By: {{ i.author.username }}</p>
+        </div>
+
+        <!-- 🚀 Asli Instagram Jaisa Complete Comment Section -->
+        <div class="comments-section"
+            style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0, 0, 0, 0.7); padding: 15px; border-radius: 15px; z-index: 10; display: flex; flex-direction: column;">
+
+            <!-- Hissa 1: Purane Comments Dikhane Wali Jagah -->
+            <div style="max-height: 100px; overflow-y: auto; margin-bottom: 10px; text-align: left;">
+                {% for comment in i.comment_set.all %}
+                <div style="font-size: 13px; color: white; margin-bottom: 5px;">
+                    <strong>{{ comment.user.username|default:"User" }}:</strong> {{ comments.text }}
+                </div>
+                {% empty %}
+                <div style="font-size: 12px; color: lightgray;">Be the first to comment!</div>
+                {% endfor %}
+            </div>
+
+            <!-- Hissa 2:  NAYA COMMENT LIKHNE WALA BOX (Form) -->
+            <form method="post" action="{% url 'post_detail' i.id %}"
+                style="display: flex; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                {% csrf_token %}
+                <!-- Comment likhne ki jagah -->
+                <input type="text" name="text" placeholder="Add a comment..." required
+                    style="flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 14px; padding-left: 5px;">
+
+                <!-- Post karne ka button -->
+                <button type="submit"
+                    style="background: none; border: none; color: #0095f6; font-weight: bold; cursor: pointer; font-size: 14px;">Post</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        const videos = document.querySelectorAll(".reel-video");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+
+                if (entry.isIntersecting) {
+                    video.play().catch(() => { });
+                } else {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        }, {
+            threshold: 0.7
+        });
+
+        videos.forEach(video => {
+            observer.observe(video);
+
+
+            video.addEventListener("click", () => {
+                video.muted = !video.muted;
+            });
+        });
+    </script>
+{%endfor%}
+{% endblock %}
