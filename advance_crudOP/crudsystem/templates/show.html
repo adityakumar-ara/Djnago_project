@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{%block content%}
+<h2>Student List</h2>
+{%if students %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Student name</th>
+      <th>Roll Number</th>
+      <th>village</th>
+      <th>Pin Code</th>
+      <th>Department</th>
+      <th>Course</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in students%}
+    <tr>
+      <td>{{i.std_name}}</td>
+      <td>{{i.std_roll}}</td>
+      <td>{{ i.std_village}}</td>
+      <td>{{ i.std_pinCode}}</td>
+      <td>{{i.department}}</td>
+      <td>{{i.course}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning">No students added yet!</div>
+{% endif %}
+{%endblock%}

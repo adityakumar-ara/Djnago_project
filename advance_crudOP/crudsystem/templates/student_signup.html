@@ -1,0 +1,8 @@
+{% extends "main.html" %}
+{%block content%}
+<form method="POST" action="Student_signup">
+     {% csrf_token %}
+     {{% form.as_p%}}
+     <button type="submit" class="btn btn-primary">SignUp</button>
+</form>
+{% endblock %}
