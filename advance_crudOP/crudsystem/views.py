@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
-from .forms import StudentRegistration,  student_signup
+from .forms import StudentRegistration,BasicSignupForm
 from django.contrib import messages
-from .models import*
+from .models import *
 # Create your views here.
 def create_student(request):
     if request.method == 'POST':
@@ -11,19 +11,25 @@ def create_student(request):
             return redirect('/')
     else:
         form = StudentRegistration()  
-    return render(request, 'add_student.html',{'form':form,})      
+    return render(request, 'add_student.html',{'form':form})      
 
 def show_student(request):
     students = Student.objects.all()   
     return render (request, 'show.html', {'students':students})   
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import BasicSignupForm # Apna naya simple form import karein
+
 def student_signup(request):
     if request.method == 'POST':
-        form = Student_signup(request.POST)
+        form = BasicSignupForm(request.POST) 
+        
         if form.is_valid():
             form.save()
-            messages.success(request,"Registration Successfull")
-            return redirect('/')
+            messages.success(request, "Account created successfully!")
+            return redirect('/') 
     else:
-        form = Student_signup()
-    return render(request, 'student_signup.html',{'form':form})
+        form = BasicSignupForm()
+        
+    return render(request, 'student_signup.html', {'form': form})
