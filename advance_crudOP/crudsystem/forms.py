@@ -1,7 +1,7 @@
 from django import forms
 from .models import Student
 from django.contrib.auth.models import User
-from .models import Student_signup
+from django.contrib.auth.forms import UserCreationForm
 
 
 class StudentRegistration(forms.ModelForm):
@@ -19,7 +19,12 @@ class StudentRegistration(forms.ModelForm):
             'course': forms.Select(attrs={'class': 'form-select'}),
         }
 
-class student_signup(forms.ModelForm):
+
+
+class BasicSignupForm(UserCreationForm):
+    
+    email = forms.EmailField(required=True)
+    
     class Meta:
-        model = Student_signup
-        fields = '__all__'
+        model = User
+        fields = ['username', 'email'] 
