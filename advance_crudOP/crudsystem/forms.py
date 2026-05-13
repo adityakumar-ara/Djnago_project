@@ -8,7 +8,7 @@ class StudentRegistration(forms.ModelForm):
     
     class Meta:
         model = Student
-        fields = ['std_name','std_roll','std_village','std_pinCode','department','course']
+        fields = ['std_name','std_roll','std_village','std_pinCode','department','course','std_email']
 
         widgets = {
             'std_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -17,6 +17,7 @@ class StudentRegistration(forms.ModelForm):
             'std_pinCode': forms.NumberInput(attrs={'class': 'form-control'}),
             'department': forms.Select(attrs={'class': 'form-select'}),
             'course': forms.Select(attrs={'class': 'form-select'}),
+            'std_email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
 

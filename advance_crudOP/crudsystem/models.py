@@ -22,6 +22,7 @@ class Student(models.Model):
     std_roll = models.CharField(max_length=20, unique=True)
     std_village = models.CharField(max_length=100)
     std_pinCode = models.IntegerField()
+    std_email = models.EmailField(blank=True, null=True)  # Added email field
     
     # Department aur Course ke liye ForeignKey
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)

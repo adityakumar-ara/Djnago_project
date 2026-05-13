@@ -1,6 +1,17 @@
 {% extends "main.html" %}
 {%block content%}
 <h2>Student List</h2>
+<form method="GET" action="{% url 'show_student' %}" class="row g-3 mb-4">
+    <div class="col-auto">
+        <input type="text" name="search_query" class="form-control" 
+               placeholder="Search anything..." value="{{ request.GET.search_query }}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success">Search</button>
+        <!-- Reset button se search clear ho jayegi -->
+        <a href="{% url 'show_student' %}" class="btn btn-dark">View All</a>
+    </div>
+</form>
 {%if students %}
 <table class="table">
   <thead>
@@ -29,4 +40,35 @@
 {% else %}
 <div class="alert alert-warning">No students added yet!</div>
 {% endif %}
+<!-- Pagination Buttons -->
+<div class="container mt-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            
+            {% if students.has_previous %}
+                <li class="page-item">
+                    <!-- 'search_query' ko URL mein maintain rakhna zaroori hai -->
+                    <a class="page-item" href="?page=1&search_query={{ query }}">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ students.previous_page_number }}&search_query={{ query }}">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ students.number }} of {{ students.paginator.num_pages }}</span>
+            </li>
+
+            {% if students.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ students.next_page_number }}&search_query={{ query }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ students.paginator.num_pages }}&search_query={{ query }}">Last</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
 {%endblock%}
