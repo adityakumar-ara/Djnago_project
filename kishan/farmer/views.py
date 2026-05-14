@@ -8,7 +8,7 @@ def Product_list(request):
     sales = CropSale.objects.all()
     contex={
         'farmer':farmer,
-        'sales':sales
+        'sales':sales,
     }
     return render(request ,'farmer/kishanprod.html',contex)
 # add
