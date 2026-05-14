@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3>Welcome, {{ user.username }}!</h3>
+
+{% endif %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for i in products %}
+        <tr>
+            <td>{{ i.name }}</td>
+            <td>{{ i.price }}</td>
+            <td>{% if i.product_image %}
+                <img src="{{ i.image.url }}" alt="{{ i.name }}">
+                {% else %}
+                <p>No Image available</p>
+                {% endif %}
+            </td>
+            <td>{{ i.description }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.created_at }}</td>
+            <td><a href="{% url 'edit' i.id %}" class="btn btn-warning">Edit Product</a>
+            <a href="{% url 'delete_product' i.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Product Not Available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

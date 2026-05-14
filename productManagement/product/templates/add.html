@@ -1,0 +1,28 @@
+{% extends 'main.html'%}
+{% block content %}
+<h3>Add New Product</h3>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mt-3">
+        <label for="">Product Name</label>
+        <input type="text" name="name" id="" class="form-control" required>
+    </div>
+    <div class="mt-3">
+        <label for="">Price</label>
+        <input type="number" name="price" id="" class="form-control" required>
+    </div>
+    <div class="mt-3">
+        <label for="">Image</label>
+        <input type="file" name="image" id="" class="form-control" required>
+    </div>
+    <div class="mt-3">
+        <label for="">Discription</label>
+        <input type="text" name="discription" id="" class="form-control" required>
+    </div>
+    <div class="mt-3">
+        <label for="" class="label-control">Quantity</label>
+        <input type="number" name="quantity" id="" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Add</button>
+</form>
+{% endblock %}

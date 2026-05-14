@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+<form action="" method="POST" class="from">
+    {% csrf_token %}
+    <label for="" class="label-control">Name</label>
+    <input type="text" name="name" id="" class="form-control" value="{{ product.name }}" maxlength="50">
+    <label for="" class="label-control">Price</label>
+    <input type="number" name="price" id="" class="form-control" value="{{ product.price }}">
+    <label for="" class="label-control">Image</label>
+    <input type="file" name="image" id="" class="form-control" value="{{ product.image }}">
+    <label for="" class="label-control">Discription</label>
+    <input type="text" name="discription" id="" class="form-control" value="{{ product.description }}" maxlength="500">
+    <label for="" class="label-control">Quantity</label>
+    <input type="number" name="quantity" id="" class="form-control" value="{{ product.quantity }}"><br>
+    <button role="button" class="btn btn-warning">EDIT</button>
+</form>
+{% endblock %}
