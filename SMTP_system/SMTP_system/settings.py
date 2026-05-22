@@ -120,3 +120,22 @@ STATIC_URL = 'static/'
 TATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+
+EMAIL_BACKEND = 'SMTP_system.custom_backend.UnverifiedEmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = False
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'adityaara7667@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'yyjvijbozpszviap'
+EMAIL_RECEIPT_ADDRESS = 'funnwithaditya@gmail.com'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = '74.125.195.108'
+
+# EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+# EMAIL_HOST_USER = '9436caa2e52eb9'
+# EMAIL_RECEIPT_ADDRESS = 'neuteissofroibri-5323@yopmail.com'
+# EMAIL_HOST_PASSWORD = '41d198fbdfe1f0'
+# EMAIL_PORT = '2525'
