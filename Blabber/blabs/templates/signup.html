@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-6">
+    {% extends 'main.html' %}
+    {% block content %}
+      <hr />
+      <form method="POST" action="{% url 'signup_view' %}" class="border border-dark p-4 shadow rounded-4">
+        <h2>Welcome to SignUp Page</h2>
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" id="" class="form-control" placeholder="create a strong Passwprd" required />
+        </div>
+        <div class="mb-3">
+          <label for="conformetion password" class="form-label">Re Passwprd</label>
+          <input type="password" name="password_confirmation" class="form-control" id="" placeholder="Password must be same" required />
+        </div>
+        <div class="btn">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+          <button type="button" class="btn btn-outline-secondary rounded-pill" onclick="history.back()">⬅ Back</button>
+        </div>
+      </form>
+      {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{ message }}");
+            {% endfor %}
+        </script>
+      {% endif %}
+    {% endblock %}
+  </div>
+</div>

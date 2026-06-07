@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<form action="{% url 'create_post' %}" method="POST">
+  {% csrf_token %}
+  <p>
+    Posting as: <strong>@{{ user.username }}</strong>
+  </p>
+  <div class="mb-3">
+    <textarea class="form-control" name="text" rows="4" placeholder="What's on your mind?" required></textarea>
+  </div>
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-primary rounded-pill">Post Bubble</button>
+  </div>
+</form>
+{% endblock %}

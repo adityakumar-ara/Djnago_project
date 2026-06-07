@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hamare Students</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;">
+
+    <h1 style="color: darkblue; text-align: center;">🎓 Students List</h1>
+    <hr>
+
+    <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        
+        {% for std in students %}
+            <li style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; text-align: center;">
+                
+                {% if std.profile_pic %}
+                    <img src="{{ std.profile_pic.url }}" alt="Profile Photo" width="120" height="120" style="border-radius: 50%; object-fit: cover;"><br><br>
+                {% else %}
+                    <div style="width: 120px; height: 120px; background-color: #ccc; border-radius: 50%; display: inline-block; line-height: 120px; color: white; font-weight: bold;">No Photo</div><br><br>
+                {% endif %}
+
+                <h3 style="margin: 5px 0; color: #333;">{{ std.name }}</h3>
+                <p style="margin: 2px 0; color: #666;"><strong>Roll No:</strong> {{ std.roll_number }}</p>
+                <p style="margin: 2px 0; color: #666;"><strong>Course:</strong> {{ std.course }}</p>
+                <p style="margin: 2px 0; color: #666;"><strong>Location:</strong> {{ std.location }}</p>
+                
+            </li>
+        {% empty %}
+            <h3 style="color: red;">Bhai, abhi tak Admin panel se koi student add nahi kiya hai!</h3>
+        {% endfor %}
+
+    </ul>
+
+</body>
+</html>

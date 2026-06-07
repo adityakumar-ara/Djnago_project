@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <form action="" method="POST" enctype="multipart/form-data" class="table">
+        {% csrf_token %}
+        <label for="student name" class="label-control">Student Name</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name" required><br>
+        <label for="E_no">Enrollment Number</label>
+        <input type="number" name="E_no" id="E_no" class="form-control" placeholder="Enter Enrollment" required><br>
+        <label for="">Upload Image...</label>
+        <input type="file" name="image" class="form-control"> <br>
+        <button type="submit" class="btn btn-success" >Add Student</button>
+    </form>
+</body>
+</html>

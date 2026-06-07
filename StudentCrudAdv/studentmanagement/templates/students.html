@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h2>Studetn List</h2>
+    <a href="/addstudent/" role="button" class="btn btn-primary">+Student</a>
+    {% csrf_token %}
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Enrollment No</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in students %}
+        <tr>
+          <td>{{ i.name }}</td>
+          <td>{{ i.e_no }}</td>
+          <td>
+            {% if i.image %}
+            <img
+              src="{{ i.image.url }}"
+              alt="image not found"
+              style="width: 50px; height: auto"
+            />
+            {% else %}
+            <span class="text-muted">No Image</span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'edit_student' i.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'delete_student' i.id %}" class="btn btn-danger">Delete</a>
+          </td>
+          
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="text-center">No students found.</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

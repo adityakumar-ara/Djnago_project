@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block content %}
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-6 col-lg-4">
+      <h2 class="text-center mb-4">Login to Blabber 🫧</h2>
+
+      <form method="post" action="{% url 'login_view' %}">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">🔐</span>
+          <input type="password" class="form-control" name="password" placeholder="password" aria-label="Password" aria-describedby="basic-addon1" required />
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary rounded-pill">Login</button>
+        </div>
+      </form>
+      <div class="mt-4 text-center">
+        <p class="text-muted small">
+          Don't have an account? <a href="{% url 'signup_view' %}" class="text-decoration-none">Sign Up</a>
+        </p>
+      </div>
+      {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+      {% endif %}
+      <!-- 🚀 Smart Back Button -->
+      <button type="button" class="btn btn-outline-secondary rounded-pill mb-3" onclick="history.back()">⬅ Back</button>
+    </div>
+  </div>
+{% endblock %}

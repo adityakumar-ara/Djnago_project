@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm rounded-4 border-0 p-4">
+            <h3 class="mb-4">Edit Bubble 🫧</h3>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <p class="text-muted mb-2">Editing as: <strong class="text-dark">@{{ user.username }}</strong></p>
+                
+                <div class="mb-3">
+                    <!-- 🚀 Dhyan dein: Textarea ke beech mein {{ post.text }} likha hai taaki purana message dikhe -->
+                    <textarea class="form-control" name="text" rows="4" required>{{ post.text }}</textarea>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{% url 'post_list' %}" class="btn btn-secondary rounded-pill me-md-2">Cancel</a>
+                    <button type="submit" class="btn btn-primary rounded-pill">Update Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
