@@ -93,7 +93,7 @@ def edit(request, id):
        updateproduct.save()
        return redirect('product_list')
     context = {
-        'product': updateproduct
+        'product': updateproduct,
     }
     return render(request, 'edit.html', context)   
 
