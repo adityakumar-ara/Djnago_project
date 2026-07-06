@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+{% include 'messages.html' %}
+
+{% if otp_sent %}
+<div class="alert alert-info">
+    An OTP has been sent to {{ email }}. Enter it below to verify your email.
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="otp" class="form-label">OTP</label>
+    <input type="text" name="otp" id="otp" class="form-control" placeholder="Enter OTP" required>
+    <button class="btn btn-outline-success mt-2">Verify OTP</button>
+</form>
+{% else %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="name" class="form-label">Full Name</label>
+    <input type="text" name="full_name" id="name" class="form-control" placeholder="Enter full name" required>
+    <label for="email" class="form-label">Email</label>
+    <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
+    <label for="conform_password" class="form-label">Conform Password</label>
+    <input type="password" name="conform_password" id="conform_password" class="form-control" placeholder="Enter conform_password" required><br>
+    <button class="btn btn-outline-primary">Register</button>
+</form>
+{% endif %}
+{% endblock %}
