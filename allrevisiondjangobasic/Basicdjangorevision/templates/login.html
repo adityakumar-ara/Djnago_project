@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+{% include 'messages.html' %}
+<div class="container">
+    <h3>Login form </h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required> <br>
+            <button class="btn btn-outline-primary">Login</button>
+    </form>
+</div>
+
+{% endblock %}
