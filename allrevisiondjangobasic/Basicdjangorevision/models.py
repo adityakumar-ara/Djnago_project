@@ -41,6 +41,6 @@ class Student(models.Model):
     std_dob = models.DateField()
     std_image = models.ImageField(upload_to='student/', blank=True, null=True)
     gender = models.CharField(max_length=20,choices=GENDER_CHOICES,null=True,blank=True)
-    
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.std_roll    
