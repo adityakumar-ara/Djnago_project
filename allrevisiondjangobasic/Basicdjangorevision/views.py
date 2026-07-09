@@ -86,8 +86,8 @@ def register(request):
 
 
 def home(request):
-    all_users = CustomeUser.objects.all()
-    context = {'student': all_users}
+    all_students = Student.objects.all()
+    context = {'students': all_students}
     return render(request, 'home.html', context)
 
 
@@ -118,8 +118,8 @@ def student_registration(request):
 
     if request.method == 'POST':
         std_name = request.POST.get('std_name', '').strip()
-        course_id = request.POST.get('course')
-        branch_id = request.POST.get('branch')
+        course = request.POST.get('course')
+        branch = request.POST.get('branch')
         semester = request.POST.get('semester', '').strip()
         std_roll = request.POST.get('std_roll', '').strip()
         std_no = request.POST.get('std_no', '').strip()
@@ -128,14 +128,34 @@ def student_registration(request):
         std_dob = request.POST.get('std_dob', '').strip()
         gender = request.POST.get('gender', '').strip()
         std_image = request.FILES.get('std_image')
-
-        if not all([std_name, course_id, branch_id, semester, std_roll, std_no, std_email, std_address, std_dob, gender]):
+        
+        student_info = {
+            'std_name':std_name,
+            'course':course,
+            'branch':branch,
+            'semester':semester,
+            'std_roll':std_roll,
+            'std_no':std_no,
+            'std_email':std_email,
+            'std_address':std_address,
+            'std_dob':std_dob,
+            'gender':gender,
+        }
+        if not all([std_name, course, branch, semester, std_roll, std_no, std_email, std_address, std_dob, gender]):
             messages.error(request, 'Please fill in all required fields.')
             return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
-
+        if Student.objects.filter(std_email=std_email).exists():
+            messages.error(request,'This Email already registed')
+            return render(request,'student_registration.html',student_info)
+        if Student.objects.filter(std_no=std_no).exists():
+                messages.error(request,"this Phone Number alreaady registed")
+                return redirect(request,'student_registration.html',student_info)
+        if Student.objects.filter(std_roll=std_roll).exists():
+                messages.error(request,"this Phone Number alreaady Roll Number")
+                return redirect(request,'student_registration.html',student_info)
         try:
-            course_obj = Course.objects.get(id=course_id)
-            branch_obj = Branch.objects.get(id=branch_id, course=course_obj)
+            course_obj = Course.objects.get(id=course)
+            branch_obj = Branch.objects.get(id=branch, course=course_obj)
         except (Course.DoesNotExist, Branch.DoesNotExist):
             messages.error(request, 'Please select a valid course and branch.')
             return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})

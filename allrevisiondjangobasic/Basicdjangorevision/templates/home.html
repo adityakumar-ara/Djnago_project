@@ -1,16 +1,40 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block extra_css %} {% endblock %}
+{% block content %} {% include 'messages.html' %} {% if user.is_authenticated %}
+<h3>Welcome, {{ user.username }} {% else %}</h3>
+Please login {% endif %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Branch</th>
+            <th>Semester</th>
+            <th>Roll No.</th>
+          </tr>
+        </thead>
 
-{% block extra_css %}
-
-{% endblock %}  
-
-{% block content %}
-{% include 'messages.html' %}
-{% if user.is_authenticated %}
-   <h3> Welcome, {{ user.username }}
-{% else %}</h3>
-    Please login
-{% endif %}
-
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ student.std_name }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.branch }}</td>
+            <td>{{ student.semester }}</td>
+            <td>{{ student.std_roll }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center">No Students Found</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
