@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
-from .models import *
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
 import random
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
-# Create your views here.
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login
+from django.core.mail import send_mail
+from django.shortcuts import redirect, render
+
+from .models import Branch, Course, CustomeUser, Student
+
+
 def send_otp_email(email, otp):
     """Send an OTP email for email verification."""
     subject = 'Verify your email'
@@ -85,90 +87,99 @@ def register(request):
 
 def home(request):
     all_users = CustomeUser.objects.all()
-    context = {
-        'student': all_users,
-    }
+    context = {'student': all_users}
     return render(request, 'home.html', context)
+
 
 def login(request):
     if request.method == "POST":
-        email = request.POST.get('email','').strip().lower()
-        password = request.POST.get('password','')
+        email = request.POST.get('email', '').strip().lower()
+        password = request.POST.get('password', '')
         if not email or not password:
-           messages.error(request, "Plz Fill all first")
-           return render(request, 'login.html')
+            messages.error(request, 'Plz Fill all first')
+            return render(request, 'login.html')
         try:
-           user_obj = CustomeUser.objects.get(email=email)
+            user_obj = CustomeUser.objects.get(email=email)
         except CustomeUser.DoesNotExist:
-            user_obj = None 
-        user = authenticate(
-            request,
-            username = user_obj.username if user_obj else email,
-            password = password,
-        )
+            user_obj = None
+        user = authenticate(request, username=user_obj.username if user_obj else email, password=password)
         if user is None:
-            messages.error(request,'Invalid email or password.')  
+            messages.error(request, 'Invalid email or password.')
             return render(request, 'login.html')
         auth_login(request, user)
         messages.success(request, 'Login successful.')
         return redirect('/')
     return render(request, 'login.html')
 
+
 def student_registration(request):
-    if request.method == "POST":
-        std_name = request.POST.get('std_name')
-        course = request.POST.get('course')
-        branch = request.POST.get('branch')
-        semester = request.POST.get('semester')
-        std_roll = request.POST.get('std_roll')
-        std_no = request.POST.get('std_no')
-        std_email = request.POST.get('std_email')
-        std_address = request.POST.get('std_address')
+    courses = Course.objects.all()
+    branches = Branch.objects.all()
+
+    if request.method == 'POST':
+        std_name = request.POST.get('std_name', '').strip()
+        course_id = request.POST.get('course')
+        branch_id = request.POST.get('branch')
+        semester = request.POST.get('semester', '').strip()
+        std_roll = request.POST.get('std_roll', '').strip()
+        std_no = request.POST.get('std_no', '').strip()
+        std_email = request.POST.get('std_email', '').strip().lower()
+        std_address = request.POST.get('std_address', '').strip()
+        std_dob = request.POST.get('std_dob', '').strip()
+        gender = request.POST.get('gender', '').strip()
         std_image = request.FILES.get('std_image')
-        std_gender = request.POST.get('std_gender')
+
+        if not all([std_name, course_id, branch_id, semester, std_roll, std_no, std_email, std_address, std_dob, gender]):
+            messages.error(request, 'Please fill in all required fields.')
+            return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
+
+        try:
+            course_obj = Course.objects.get(id=course_id)
+            branch_obj = Branch.objects.get(id=branch_id, course=course_obj)
+        except (Course.DoesNotExist, Branch.DoesNotExist):
+            messages.error(request, 'Please select a valid course and branch.')
+            return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
+
         student = Student.objects.create(
             std_name=std_name,
-            course = course,
-            branch = branch,
-            semester = semester,
-            std_roll =std_roll,
-            std_no = std_no,
-            std_email = std_email,
-            std_address = std_address,
-            std_image = std_image,
-            std_gender = std_gender,
+            course=course_obj,
+            branch=branch_obj,
+            semester=int(semester),
+            std_roll=std_roll,
+            std_no=std_no,
+            std_email=std_email,
+            std_address=std_address,
+            std_dob=std_dob,
+            gender=gender,
+            std_image=std_image,
+            user=request.user if request.user.is_authenticated else None,
         )
-        try:
-            send_mail (
-                subject="Student Registration Successful",
-                 message=f"""
-                 Hello {student.std_name},
-                 Your registration has been completed successfully.
-                 Student Details:
-                 Name: {student.std_name}
-                 Roll No: {student.std_roll}
-                 Course: {student.course}
-                 Branch: {student.branch}
-                 Semester: {student.semester}
 
-                 Thank you for registering.
-                 Regards,
-                 
-                 Student Management System
-                """,
+        try:
+            send_mail(
+                subject='Student Registration Successful',
+                message=f"""
+Hello {student.std_name},
+Your registration has been completed successfully.
+Student Details:
+Name: {student.std_name}
+Roll No: {student.std_roll}
+Course: {student.course.course_name}
+Branch: {student.branch.branch_name}
+Semester: {student.semester}
+
+Thank you for registering.
+Regards,
+Student Management System
+""",
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[student.std_email],
                 fail_silently=False,
             )
-            messages.success(
-                request,
-                "Student registered successfully. A confirmation email has been sent."
-            )
-        except Exception as e:
-            print(e)
-            messages.warning(
-                request,
-                "Student registered successfully, but the email could not be sent."
-            )
-        return redirect("student_registration")  
-    return render(request, "student_registration.html")  
+            messages.success(request, 'Student registered successfully. A confirmation email has been sent.')
+        except Exception as exc:
+            print(exc)
+            messages.warning(request, 'Student registered successfully, but the email could not be sent.')
+        return redirect('/')
+
+    return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
