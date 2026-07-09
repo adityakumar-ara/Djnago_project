@@ -14,6 +14,7 @@ Please login {% endif %}
             <th>Branch</th>
             <th>Semester</th>
             <th>Roll No.</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -26,6 +27,12 @@ Please login {% endif %}
             <td>{{ student.branch }}</td>
             <td>{{ student.semester }}</td>
             <td>{{ student.std_roll }}</td>
+            <td>
+              {% if request.user == student.user %}
+              <span class="badge text-bg-success">Edit</span>
+              <span class="badge text-bg-danger">Delete</span>
+              {% endif %}
+            </td>
           </tr>
           {% empty %}
           <tr>

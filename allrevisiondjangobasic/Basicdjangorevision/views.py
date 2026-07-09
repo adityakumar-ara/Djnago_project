@@ -179,19 +179,19 @@ def student_registration(request):
             send_mail(
                 subject='Student Registration Successful',
                 message=f"""
-Hello {student.std_name},
-Your registration has been completed successfully.
-Student Details:
-Name: {student.std_name}
-Roll No: {student.std_roll}
-Course: {student.course.course_name}
-Branch: {student.branch.branch_name}
-Semester: {student.semester}
+                Hello {student.std_name},
+                Your registration has been completed successfully.
+                Student Details:
+                Name: {student.std_name}
+                Roll No: {student.std_roll}
+                Course: {student.course.course_name}
+                Branch: {student.branch.branch_name}
+                Semester: {student.semester}
 
-Thank you for registering.
-Regards,
-Student Management System
-""",
+                Thank you for registering.
+                Regards,
+                Student Management System
+                """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[student.std_email],
                 fail_silently=False,
@@ -203,3 +203,6 @@ Student Management System
         return redirect('/')
 
     return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
+
+
+                
