@@ -29,8 +29,8 @@ Please login {% endif %}
             <td>{{ student.std_roll }}</td>
             <td>
               {% if request.user == student.user %}
-              <span class="badge text-bg-success">Edit</span>
-              <span class="badge text-bg-danger">Delete</span>
+              <a href="{% url 'update_student' student.id %}" class="badge text-bg-success">Edit</a>
+              <a href="{% url 'delete_student' student.id %}" class="badge text-bg-danger">Delete</a>
               {% endif %}
             </td>
           </tr>
