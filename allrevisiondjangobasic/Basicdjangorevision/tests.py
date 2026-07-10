@@ -4,6 +4,13 @@ from django.urls import reverse
 from .models import Branch, Course, Student
 
 
+class StudentUpdateUrlTests(TestCase):
+    def test_studentupdate_route_redirects_to_home_without_student_id(self):
+        response = self.client.get('/studentupdate/')
+
+        self.assertRedirects(response, reverse('home'))
+
+
 class StudentRegistrationViewTests(TestCase):
     def test_student_registration_creates_student(self):
         course = Course.objects.create(course_name="BCA")

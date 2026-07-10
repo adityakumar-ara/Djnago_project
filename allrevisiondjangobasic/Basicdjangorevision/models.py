@@ -58,8 +58,11 @@ class Student(models.Model):
     std_dob = models.DateField()
     std_image = models.ImageField(upload_to='student/', blank=True, null=True)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, default=models.DateTimeField().default)
-    updated_at = models.DateTimeField(auto_now=True, default=models.DateTimeField().default)
+    is_deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
 
     def __str__(self):
         return self.std_name or self.std_roll or str(self.id)

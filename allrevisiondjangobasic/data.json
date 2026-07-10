@@ -1,0 +1,318 @@
+[
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$EPDlEUjSfuxB5n8hEMPrmm$Ep1Eg0HKQpB4HqDK0zYaJGLOea86AYaKVS87InmvDg4=",
+        "last_login": "2026-07-10T02:58:39.881Z",
+        "is_superuser": true,
+        "username": "allrevision",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-07-04T18:53:40.396Z",
+        "full_name": null,
+        "email": "adityaara7667@gmail.com",
+        "mobile_number": "",
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$o7bUFwhDXqot5XnJkmYzhj$9+kuDMIc9hT5H1vVTYko/nJStlDLzkHuAMwdBmPZG3s=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "hifimiyeku-2927",
+        "first_name": "",
+        "last_name": "", 
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-06T04:37:21.627Z",
+        "full_name": "Aditya Kumar",
+        "email": "hifimiyeku-2927@yopmail.com",
+        "mobile_number": null,
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$0gseMTyrn8S37too4yzoLX$hlBOp9gvBhlowUR9CPbcYGXIZP4Wv3GTLyl29LB9aqU=",
+        "last_login": "2026-07-06T06:22:33.599Z",
+        "is_superuser": false,
+        "username": "tusesusopou-5628",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-06T05:46:03.584Z",
+        "full_name": "Aditya Kumar",
+        "email": "tusesusopou-5628@yopmail.com",
+        "mobile_number": null,
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$HOKDgK3aUD0vdOYyRzpUSK$ApYhKR2OXJHKsmc0YwKR43a/C5Q3uHn/bhSnLaDkVUM=",
+        "last_login": "2026-07-09T02:08:16.256Z",
+        "is_superuser": false,
+        "username": "funnwithaditya",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-09T02:02:15.961Z",
+        "full_name": "Aditya Kumar",
+        "email": "funnwithaditya@gmail.com",
+        "mobile_number": null,
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$txeKqkhTgUronGHlpDtmuk$u3Cj+6YNS8wDB22MilnJFAy7ekVeU5CRR3HJvzBsxwY=",
+        "last_login": "2026-07-09T04:55:12.983Z",
+        "is_superuser": false,
+        "username": "pricoutrifroweu-5537",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-09T04:54:48.689Z",
+        "full_name": "udit kumar",
+        "email": "pricoutrifroweu-5537@yopmail.com",
+        "mobile_number": null,
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.customeuser",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Z2ipW837KqOrweYghnW4FO$vLmaLzx31vr30OKihOPGdcUDhMTYOSHVZQUt/nLNJgI=",
+        "last_login": "2026-07-09T06:18:25.086Z",
+        "is_superuser": false,
+        "username": "cruttauquoillebrei-5245",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-09T06:18:10.473Z",
+        "full_name": "Raju",
+        "email": "cruttauquoillebrei-5245@yopmail.com",
+        "mobile_number": null,
+        "dob": null,
+        "address": "",
+        "alternate_mobile_no": null,
+        "profile_image": "",
+        "gender": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "Basicdjangorevision.course",
+    "pk": 1,
+    "fields": {
+        "course_name": "BCA"
+    }
+},
+{
+    "model": "Basicdjangorevision.course",
+    "pk": 2,
+    "fields": {
+        "course_name": "MCA"
+    }
+},
+{
+    "model": "Basicdjangorevision.course",
+    "pk": 3,
+    "fields": {
+        "course_name": "B.Tech"
+    }
+},
+{
+    "model": "Basicdjangorevision.course",
+    "pk": 4,
+    "fields": {
+        "course_name": "MBA"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 1,
+    "fields": {
+        "course": 1,
+        "branch_name": "Computer Science"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 2,
+    "fields": {
+        "course": 1,
+        "branch_name": "Information Technology"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 3,
+    "fields": {
+        "course": 1,
+        "branch_name": "Data Science"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 4,
+    "fields": {
+        "course": 2,
+        "branch_name": "Computer Science"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 5,
+    "fields": {
+        "course": 3,
+        "branch_name": "Computer Science Engineering"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 6,
+    "fields": {
+        "course": 3,
+        "branch_name": "Mechanical Engineering"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 7,
+    "fields": {
+        "course": 3,
+        "branch_name": "Civil Engineering"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 8,
+    "fields": {
+        "course": 4,
+        "branch_name": "Finance"
+    }
+},
+{
+    "model": "Basicdjangorevision.branch",
+    "pk": 9,
+    "fields": {
+        "course": 4,
+        "branch_name": "Marketing"
+    }
+},
+{
+    "model": "Basicdjangorevision.student",
+    "pk": 1,
+    "fields": {
+        "user": 4,
+        "std_name": "aditya kumar",
+        "course": 1,
+        "branch": 1,
+        "semester": 5,
+        "std_roll": "250110411",
+        "std_no": "9204622597",
+        "std_email": "funnwithditya@gmail.com",
+        "std_address": "hardiaya 802152`",
+        "std_dob": "2006-06-06",
+        "std_image": "student/Picsart_26-01-14_08-33-46-732.jpg",
+        "gender": "MALE",
+        "is_deleted": true,
+        "created_at": "2026-07-09T03:26:45.409Z",
+        "updated_at": "2026-07-10T02:57:53.061Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "Basicdjangorevision.student",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "std_name": "Udit kumar",
+        "course": 1,
+        "branch": 1,
+        "semester": 4,
+        "std_roll": "2544418",
+        "std_no": "7061020506",
+        "std_email": "pricoutrifroweu-5537@yopmail.com",
+        "std_address": "802152",
+        "std_dob": "2006-06-06",
+        "std_image": "student/OIP_2nGovvk.jpg",
+        "gender": "MALE",
+        "is_deleted": false,
+        "created_at": "2026-07-09T05:20:52.094Z",
+        "updated_at": "2026-07-09T05:20:52.094Z",
+        "deleted_at": null
+    }
+},
+{
+    "model": "Basicdjangorevision.student",
+    "pk": 3,
+    "fields": {
+        "user": 6,
+        "std_name": "rajju Kumar",
+        "course": 1,
+        "branch": 2,
+        "semester": 5,
+        "std_roll": "5474111",
+        "std_no": "687742211122",
+        "std_email": "cruttauquoillebrei-5245@yopmail.com",
+        "std_address": "802152",
+        "std_dob": "2006-02-02",
+        "std_image": "student/41S41AWTdsL._AC_SR240220_.jpg",
+        "gender": "MALE",
+        "is_deleted": false,
+        "created_at": "2026-07-09T06:19:29.280Z",
+        "updated_at": "2026-07-09T06:19:29.280Z",
+        "deleted_at": null
+    }
+}
+]
