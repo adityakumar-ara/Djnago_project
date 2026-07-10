@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404
 
 from .models import Branch, Course, CustomeUser, Student
 
@@ -86,7 +87,7 @@ def register(request):
 
 
 def home(request):
-    all_students = Student.objects.all()
+    all_students = Student.objects.filter(is_deleted = False)
     context = {'students': all_students}
     return render(request, 'home.html', context)
 
@@ -98,17 +99,24 @@ def login(request):
         if not email or not password:
             messages.error(request, 'Plz Fill all first')
             return render(request, 'login.html')
+        
+        user = None
         try:
+            # Find the user by email first
             user_obj = CustomeUser.objects.get(email=email)
+            # Then, use the backend's authenticate method
+            user = authenticate(request, username=user_obj.username, password=password)
         except CustomeUser.DoesNotExist:
-            user_obj = None
-        user = authenticate(request, username=user_obj.username if user_obj else email, password=password)
-        if user is None:
+            # User with this email doesn't exist, authentication will fail.
+            pass
+        
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, 'Login successful.')
+            return redirect('/')
+        else:
             messages.error(request, 'Invalid email or password.')
             return render(request, 'login.html')
-        auth_login(request, user)
-        messages.success(request, 'Login successful.')
-        return redirect('/')
     return render(request, 'login.html')
 
 
@@ -144,15 +152,15 @@ def student_registration(request):
         if not all([std_name, course, branch, semester, std_roll, std_no, std_email, std_address, std_dob, gender]):
             messages.error(request, 'Please fill in all required fields.')
             return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
-        if Student.objects.filter(std_email=std_email).exists():
-            messages.error(request,'This Email already registed')
-            return render(request,'student_registration.html',student_info)
-        if Student.objects.filter(std_no=std_no).exists():
-                messages.error(request,"this Phone Number alreaady registed")
-                return redirect(request,'student_registration.html',student_info)
-        if Student.objects.filter(std_roll=std_roll).exists():
-                messages.error(request,"this Phone Number alreaady Roll Number")
-                return redirect(request,'student_registration.html',student_info)
+        if Student.objects.filter(std_email=std_email, is_deleted=False).exists():
+            messages.error(request, 'This Email is already registered.')
+            return render(request, 'student_registration.html', student_info)
+        if Student.objects.filter(std_no=std_no, is_deleted=False).exists():
+            messages.error(request, "This Phone Number is already registered.")
+            return render(request, 'student_registration.html', student_info)
+        if Student.objects.filter(std_roll=std_roll, is_deleted=False).exists():
+            messages.error(request, "This Roll Number is already registered.")
+            return render(request, 'student_registration.html', student_info)
         try:
             course_obj = Course.objects.get(id=course)
             branch_obj = Branch.objects.get(id=branch, course=course_obj)
@@ -200,9 +208,52 @@ def student_registration(request):
         except Exception as exc:
             print(exc)
             messages.warning(request, 'Student registered successfully, but the email could not be sent.')
-        return redirect('/')
+        return redirect('student_registration')
 
     return render(request, 'student_registration.html', {'courses': courses, 'branches': branches})
 
 
-                
+
+
+
+def update_student_form(request,id):
+    std = get_object_or_404(Student, id=id, user=request.user )
+    if request.method == "POST":
+        course = get_object_or_404(
+            Course,
+            id=request.POST.get("course")
+        )
+
+        branch = get_object_or_404(
+            Branch,
+            id=request.POST.get("branch")
+        )
+        std.std_name = request.POST.get('std_name')                
+        std.course = course
+        std.branch = branch
+        std.semester = request.POST.get('semester')
+        std.std_roll = request.POST.get('std_roll')
+        std.std_no = request.POST.get('std_no')
+        std.std_email = request.POST.get('std_email')
+        std.std_address = request.POST.get('std_address')
+        std.std_dob = request.POST.get('std_dob')
+        std.gender = request.POST.get('gender')
+        image = request.FILES.get('std_image')
+        if image:
+           std.std_image = image
+        std.save()
+        messages.success(request,'Student Update Successfully')
+        return redirect('/')
+    courses = Course.objects.all()
+    branches = Branch.objects.all()
+    return render(request, 'update_student.html', {'student': std, 'courses': courses, 'branches': branches})
+
+
+def delete_student(request, id):
+    student = get_object_or_404(Student, id=id, user=request.user, is_deleted=False)
+
+    student.is_deleted = True
+    student.save()
+
+    messages.success(request, "Student deleted successfully.")
+    return redirect("home")
